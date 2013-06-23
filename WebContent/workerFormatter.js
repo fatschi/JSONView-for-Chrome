@@ -20,8 +20,11 @@ function valueToHTML(value) {
 		output += arrayToHTML(value);
 	else if (valueType == "object")
 		output += objectToHTML(value);
-	else if (valueType == "number")
+	else if (valueType == "number"){
+		if(value>1000000000000)
+			value = new Date(value);
 		output += decorateWithSpan(value, "type-number");
+	}
 	else if (valueType == "string")
 		if (/^(http|https):\/\/[^\s]+$/.test(value))
 			output += decorateWithSpan('"', "type-string") + '<a href="' + value + '">' + htmlEncode(value) + '</a>' + decorateWithSpan('"', "type-string");
